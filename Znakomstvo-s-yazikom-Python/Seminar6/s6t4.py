@@ -16,7 +16,21 @@
 
 from functions import sum_of_divisors
 
-k = int(input("Введите значение, до которого хотите проверить дружественные числа: "))
+# def sum_of_divisors(n):
+#     divisors_sum = 1
+#     for i in range(2, n):
+#         if n % i == 0:
+#             divisors_sum += i
+#     return divisors_sum
+
+def sum_of_divisors(n):
+    divisors_sum = 1
+    for i in range(2, n // 2 + 1): # Если число больше половины, то оно по дефолту не делитель
+        if n % i == 0:
+            divisors_sum += i
+    return divisors_sum
+
+k = 2000
 
 # Начинаем с 220, т.к. минимальная пара дружественных чисел начинается с 220
 for i in range(220, k + 1):
@@ -51,3 +65,23 @@ for i in range(220, k + 1):
 #
 # for item in friendly_numbers:
 #     print(*item)
+
+"""
+def get_sum(n):
+    my_sum = 1
+    for el in range(2, n // 2 + 1):
+        if n % el == 0:
+            my_sum += el
+    return my_sum
+
+def get_friendlies(k):
+    lst = []
+    for n in range (1, k + 1):
+        if n not in lst:
+            m = get_sum(n)
+            if n == get_sum(m) and n != m:
+                lst.append(n)
+                lst.append(m)
+    return lst
+
+print(get_friendlies(2000))"""

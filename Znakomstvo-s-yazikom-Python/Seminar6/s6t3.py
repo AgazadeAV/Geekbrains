@@ -7,7 +7,7 @@
 """
 from functions import create_list
 
-list1 = create_list(int(input("Введите длину списка: ")))
+list1 = [1, 2, 3, 2, 3, 3, 3, 3]
 # Создаём словарь dict1, где ключами являются не дублирующиеся элементы списка list1, с помощью функции set,
 # а значения будут показывать сколько раз ключи всречались в списке list1
 dict1 = {key: 0 for key in set(list1)}
@@ -22,6 +22,7 @@ print(dict1)
 count = 0
 # Проверяем значения ключей на чётность
 for key, value in dict1.items():
-    if value % 2 == 0:
-        count += value // 2
+    count += value // 2
 print(count)
+
+# print(sum([nums.count(item) // 2 for item in set(nums)]))

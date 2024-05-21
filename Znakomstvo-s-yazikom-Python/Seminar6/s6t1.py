@@ -9,11 +9,17 @@
 """
 import functions
 
-list1 = functions.create_list(int(input("Введите длину первого списка: ")))
-list2 = functions.create_list(int(input("Введите длину второго списка: ")))
-list3 = []
+list_1 = functions.create_list(int(input("Введите длину первого списка: ")))
+list_2 = functions.create_list(int(input("Введите длину второго списка: ")))
+list_3 = []
 
-for el in list1:
-    if el not in list2:
-        list3.append(el)
-print(*list3)
+# Традиционный итератор с функцией append
+for el in list_1:
+    if el not in list_2:
+        list_3.append(el)
+print(*list_3)
+
+# List comprehension
+print(*[el for el in list_1 if el not in list_2])
+
+print(*list(filter(lambda x: x not in list_2, list_1)))
