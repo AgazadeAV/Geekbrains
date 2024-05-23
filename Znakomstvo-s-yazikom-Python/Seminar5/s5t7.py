@@ -13,7 +13,7 @@ def outer(param):
         return wrapper
     return decorator
 
-@outer(1000000)
+@outer(1)
 def power_x(x, y):
     return x ** y
 

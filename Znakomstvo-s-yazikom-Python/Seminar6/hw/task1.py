@@ -5,15 +5,22 @@
 получения n-го члена прогрессии: a_n = a_1 + (n-1) * d.
 Каждое число вводится с новой строки.
 """
-args = list(map(int, input("Введите первый член, шаг и количество членов арифметической прогрессии: ").split()))
 
-def arithmetic_progression(args):
-    progression = list(range(args[2]))
-    for i in range(args[2]):
-        progression[i] = args[0] + i * args[1]
-    return progression
+a1 = 2
+d = 3
+n = 4
 
-print(*arithmetic_progression(args))
+print('\n'.join([str(a1 + i * d) for i in range(n)]))
+
+# args = list(map(int, input("Введите первый член, шаг и количество членов арифметической прогрессии: ").split()))
+
+# def arithmetic_progression(args):
+#     progression = list(range(args[2]))
+#     for i in range(args[2]):
+#         progression[i] = args[0] + i * args[1]
+#     return progression
+
+# print(*arithmetic_progression(args))
 
 # //////////////////////////////////////////////////////////////////////////////////
 

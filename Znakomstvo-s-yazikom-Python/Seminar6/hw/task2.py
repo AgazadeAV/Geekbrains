@@ -5,12 +5,12 @@
 максимума)
 """
 
-arr = list(map(int, input("Введите элементы массива: ").split()))
-min_max = list(map(int, input("Задайте диапазон чисел, сначала минимум, потом максимум ").split()))
-new_arr = []
+list_1 = [-5, 9, 0, 3, -1, -2, 1, 4, -2, 10, 2, 0, -9, 8, 10, -9, 0, -5, -5, 7]
+min_number = 0
+max_number = 10
 
-for i in range(len(arr)):
-    if min_max[0] <= arr[i] <= min_max[1]:
-        new_arr.append(i)
+# for i in range(len(list_1)):
+#     if min_number <= list_1[i] <= max_number:
+#         print(i)
 
-print(*new_arr)
+print('\n'.join([str(i) for i in range(len(list_1)) if min_number <= list_1[i] <= max_number]))
