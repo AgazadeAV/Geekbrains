@@ -36,14 +36,15 @@ def get_info():
 
 def create_file(file_name):
     with open(file_name, 'w', encoding='utf-8', newline='') as data:
-        f_w = DictWriter(data, fieldnames=['first_name', 'second_name', 'phone_number'])
+        f_w = DictWriter(data, fieldnames=['№', 'first_name', 'second_name', 'phone_number'])
         f_w.writeheader()
 
 
 def write_file(file_name):
     user_data = get_info()
     res = read_file(file_name)
-    new_obj = {'first_name': user_data[0], 'second_name': user_data[1], 'phone_number': user_data[2]}
+    count = str(len(res) + 1)
+    new_obj = {'№': count, 'first_name': user_data[0], 'second_name': user_data[1], 'phone_number': user_data[2]}
     res.append(new_obj)
     standard_write(file_name, res)
 
@@ -58,7 +59,10 @@ def remove_row(file_name):
     search = int(input("Введите номер строки для удаления: "))
     res = read_file(file_name)
     if search <= len(res):
-        res.pop(search - 1)
+        res = [row for row in res if int(row['№']) != search]
+        # Обновляем идентификаторы после удаления
+        for i, row in enumerate(res):
+            row['№'] = str(i + 1)
         standard_write(file_name, res)
     else:
         print("Введён неправильный номер")
@@ -66,7 +70,7 @@ def remove_row(file_name):
 
 def standard_write(file_name, res):
     with open(file_name, 'w', encoding='utf-8', newline='') as data:
-        f_w = DictWriter(data, fieldnames=['first_name', 'second_name', 'phone_number'])
+        f_w = DictWriter(data, fieldnames=['№', 'first_name', 'second_name', 'phone_number'])
         f_w.writeheader()
         f_w.writerows(res)
 
@@ -85,8 +89,8 @@ def find_record(file_name):
         print("Файл отсутствует, пожалуйста создайте файл.")
         return
 
-    criterion = input("Введите характеристику для поиска (first_name, second_name, phone_number): ")
-    if criterion not in ['first_name', 'second_name', 'phone_number']:
+    criterion = input("Введите характеристику для поиска (№, first_name, second_name, phone_number): ")
+    if criterion not in ['№', 'first_name', 'second_name', 'phone_number']:
         print("Некорректная характеристика для поиска.")
         return
 
@@ -110,7 +114,7 @@ def main():
         command = input("\n1. Для выхода из программы - 'q'\n2. Для записи данных - 'w'\n3. Для "
                         "чтения данных - 'r'\n4. Для удаления данных - 'd'\n5. Для копирования файла - 'c'\n6. Для "
                         "поиска данных - 'f'\nВведите команду: ")
-        if command == "q".lower():
+        if command == "q":
             print("До свидания!")
             break
         elif command == "w":
