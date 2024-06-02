@@ -110,7 +110,6 @@ def find_record(file_name):
 
 
 file_name = "phonebook.csv"
-copied_file_name = "phonebook_copy.csv"
 
 
 def main():
@@ -134,6 +133,7 @@ def main():
         elif command.lower() == "d":
             remove_row(file_name)
         elif command.lower() == "c":
+            copied_file_name = input("Введите название файла: ") + ".csv"
             copy_data(file_name, copied_file_name)
         elif command.lower() == "f":
             find_record(file_name)
