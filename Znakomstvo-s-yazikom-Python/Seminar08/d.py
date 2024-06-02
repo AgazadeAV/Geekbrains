@@ -1,10 +1,3 @@
-"""
-реализовать копирование данных из файла А в файл B.
-написать отдельную функцию copy_data:
-прочитать список словарей (read_file)
-и записать его в новый файл используя функцию standart_write
-дополнить функцию main
-"""
 from csv import DictReader, DictWriter
 from os.path import exists
 
