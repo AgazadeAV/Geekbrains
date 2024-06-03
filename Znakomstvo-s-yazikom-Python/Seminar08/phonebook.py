@@ -54,6 +54,22 @@ def read_file(file_name):
         f_r = DictReader(data)
         return list(f_r)  # список словарей
 
+def copy_row(file_name, copied_file_name):
+    if not exists(file_name):
+        print("Файл отсутствует, пожалуйста создайте файл.")
+        return
+        
+    if not exists(copied_file_name):
+        print("Файл отсутствует , пожалуйста создайте файл.")
+        return
+        
+    res = read_file(file_name)
+    copied_res = read_file(copied_file_name)
+    row_number = int(input(f"Введите номер строки, которую хотите скопировать из {file_name} в {copied_file_name}"))
+    copied_row = res[row_number]
+    copied_row['№'] = len(copied_file_name)
+    copied_res.append(copied_row)
+    standard_write(copied_file_name, copied_res)
 
 def remove_row(file_name):
     if not exists(file_name):
@@ -116,7 +132,8 @@ def main():
     while True:
         command = input("\n1. Для выхода из программы - 'q'\n2. Для записи данных - 'w'\n3. Для "
                         "чтения данных - 'r'\n4. Для удаления данных - 'd'\n5. Для копирования файла - 'c'\n6. Для "
-                        "поиска данных - 'f'\nВведите команду: ")
+                        "поиска данных - 'f'\n7. Для копии определенной строки в другой файл - 'cr'. "
+                        "\nВведите команду: ")
         if command.lower() == "q":
             print("До свидания!")
             break
@@ -133,10 +150,12 @@ def main():
         elif command.lower() == "d":
             remove_row(file_name)
         elif command.lower() == "c":
-            copied_file_name = input("Введите название файла: ") + ".csv"
+            copied_file_name = input("Введите название нового файла: ") + ".csv"
             copy_data(file_name, copied_file_name)
         elif command.lower() == "f":
             find_record(file_name)
-
+        elif command.lower() == "cr":
+            copied_row_file_name = input("Введите название файла, в который хотите скопировать: ") + ".csv"
+            copy_row(file_name, copied_row_file_name)
 
 main()
