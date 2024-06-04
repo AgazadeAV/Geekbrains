@@ -67,6 +67,24 @@ def copy_row(file_name, copied_file_name):
     standard_write(copied_file_name, copied_res)
 
 
+def edit_row(file_nmae):
+    if not exists(file_name):
+        print("Файл отсутствует, пожалуйста создайте файл.")
+        return
+        
+    search = int(input("Введите номер строки для изменения: "))
+    res = read_file(file_name)
+    if search <= len(res):
+        criterion = input("Введите характеристику для поиска (№, first_name, second_name, phone_number): ")
+            if criterion not in ['first_name', 'second_name', 'phone_number']:
+            print("Некорректная характеристика для поиска.")
+            return
+        res[search][criterion] = input("Введите новое значение для {criterion}): ")
+        print(f"Строка номер {search} изменена.")
+    else:
+        print("Введён неправильный номер")
+
+
 def remove_row(file_name):
     if not exists(file_name):
         print("Файл отсутствует, пожалуйста создайте файл.")
@@ -142,6 +160,7 @@ def main():
         "d": lambda: remove_row(file_name),
         "c": lambda: copy_data(file_name, input("Введите название нового файла: ") + ".csv"),
         "f": lambda: find_record(file_name),
+        "e": lambda: edit_row(file_name),
         "cr": lambda: copy_row(file_name, input("Введите название файла, в который хотите скопировать: ") + ".csv")
     }
 
