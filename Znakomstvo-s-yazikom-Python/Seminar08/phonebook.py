@@ -79,10 +79,11 @@ def edit_row(file_nmae):
             if criterion not in ['first_name', 'second_name', 'phone_number']:
             print("Некорректная характеристика для поиска.")
             return
-        res[search][criterion] = input("Введите новое значение для {criterion}): ")
+        res[search - 1][criterion] = input("Введите новое значение для {criterion}): ")
         print(f"Строка номер {search} изменена.")
     else:
         print("Введён неправильный номер")
+    standard_write(file_name, res)
 
 
 def remove_row(file_name):
