@@ -1,10 +1,3 @@
-"""
-реализовать копирование данных из файла А в файл B.
-написать отдельную функцию copy_data:
-прочитать список словарей (read_file)
-и записать его в новый файл используя функцию standart_write
-дополнить функцию main
-"""
 from csv import DictReader, DictWriter
 from os.path import exists
 
@@ -39,49 +32,62 @@ def create_file(file_name):
 
 
 def write_file(file_name):
+    if not validate_files(file_name):
+        return
+
     user_data = get_info()
     res = read_file(file_name)
-    count = str(len(res) + 1)
+    if res is None:
+        count = 1
+    else:
+        count = str(len(res) + 1)
     new_obj = {'№': count, 'first_name': user_data[0], 'second_name': user_data[1], 'phone_number': user_data[2]}
     res.append(new_obj)
     standard_write(file_name, res)
+    print("Данные успешно записаны.")
 
 
 def read_file(file_name):
+    if not validate_files(file_name):
+        return
+
     with open(file_name, encoding='utf-8') as data:
         f_r = DictReader(data)
         return list(f_r)
 
 
-def copy_row(file_name, copied_file_name):
-    if not validate_files(file_name, copied_file_name):
+def print_file(file_name):
+    if not validate_files(file_name):
         return
 
-    res = read_file(file_name)
-    copied_res = read_file(copied_file_name)
-    row_number = (int(input(f"Введите номер строки, которую хотите скопировать из {file_name} в {copied_file_name}: "))
-                  - 1)
-    copied_row = res[row_number]
-    copied_row['№'] = str(len(copied_res) + 1)
-    copied_res.append(copied_row)
-    standard_write(copied_file_name, copied_res)
+    records = read_file(file_name)
+    if records:
+        for record in records:
+            print(f"{record['№']}. {record['first_name']} {record['second_name']}: {record['phone_number']}")
+    else:
+        print("Файл пуст.")
 
 
 def remove_row(file_name):
-    if not exists(file_name):
-        print("Файл отсутствует, пожалуйста создайте файл.")
+    if not validate_files(file_name):
         return
 
-    search = int(input("Введите номер строки для удаления: "))
     res = read_file(file_name)
-    if search <= len(res):
-        res = [row for row in res if int(row['№']) != search]
-        for i, row in enumerate(res):
-            row['№'] = str(i + 1)
-        standard_write(file_name, res)
-        print(f"Строка номер {search} удалена.")
-    else:
-        print("Введён неправильный номер")
+    row_numbers = [int(num) for num in input("Введите через пробел номера строк для удаления: ").split() if
+                   num.isdigit() and 1 <= int(num) <= len(res)]
+
+    if not row_numbers:
+        print("Нет корректных номеров строк для удаления.")
+        return
+
+    row_numbers_set = set(row_numbers)
+    remaining_rows = [row for row in res if int(row['№']) not in row_numbers_set]
+
+    for i, row in enumerate(remaining_rows):
+        row['№'] = str(i + 1)
+
+    standard_write(file_name, remaining_rows)
+    print(f"Строки с номерами {', '.join(map(str, row_numbers))} удалены.")
 
 
 def standard_write(file_name, res):
@@ -91,19 +97,50 @@ def standard_write(file_name, res):
         f_w.writerows(res)
 
 
-def copy_data(file_name, copied_file_name):
-    if not exists(file_name):
-        print(f"Файл {file_name} не найден. Сначала создайте его.")
+def copy_data(file_name):
+    if not validate_files(file_name):
         return
 
+    command = input("Введите 'cf' для копирования файла или 'cr' для копирования строк: ").lower()
+    if command == "cf":
+        copy_file(file_name)
+    elif command == "cr":
+        copy_row(file_name)
+    else:
+        print("Некорректная команда, попробуйте снова.")
+
+
+def copy_file(file_name):
+    if not validate_files(file_name):
+        return
+
+    copied_file_name = input("Введите название нового файла: ") + ".csv"
     data = read_file(file_name)
     standard_write(copied_file_name, data)
     print(f"Данные успешно скопированы из {file_name} в {copied_file_name}")
 
 
+def copy_row(file_name):
+    copied_file_name = input("Введите название файла в который хотите скопировать строку: ") + ".csv"
+
+    if not validate_files(file_name):
+        return
+
+    res = read_file(file_name)
+    copied_res = read_file(copied_file_name)
+    row_numbers = [int(num) - 1 for num in input(f"Введите номера строк через пробел, которые хотите скопировать из "
+                                                 f"{file_name} в {copied_file_name}: ").split() if num.isdigit() and
+                   1 <= int(num) <= len(res)]
+    for row_number in row_numbers:
+        copied_row = res[row_number]
+        copied_row['№'] = str(len(copied_res) + 1)
+        copied_res.append(copied_row)
+    standard_write(copied_file_name, copied_res)
+    print("Строки успешно скопированы.")
+
+
 def find_record(file_name):
-    if not exists(file_name):
-        print("Файл отсутствует, пожалуйста создайте файл.")
+    if not validate_files(file_name):
         return
 
     criterion = input("Введите характеристику для поиска (№, first_name, second_name, phone_number): ")
@@ -111,45 +148,45 @@ def find_record(file_name):
         print("Некорректная характеристика для поиска.")
         return
 
-    value = input(f"Введите значение для поиска по {criterion}: ")
+    value = input(f"Введите значение для поиска по {criterion}: ").split()
     records = read_file(file_name)
-    results = [record for record in records if record[criterion] == value]
+    results = [record for record in records if record[criterion] in value]
 
     if results:
         for result in results:
-            print(result)
+            print(f"{result['№']}. {result['first_name']} {result['second_name']}: {result['phone_number']}")
     else:
         print("Запись не найдена.")
 
 
 def validate_files(*files):
+    all_files_exist = True
     for file in files:
         if not exists(file):
-            print(f"Файл {file} отсутствует, пожалуйста создайте файл.")
-            return False
-    return True
+            print(f"Файл {file} отсутствует, пожалуйста, создайте файл.")
+            command = input(f"Хотите создать файл {file}? Напишите Да или Нет: ").lower()
+            if command == "да":
+                create_file(file)
+            else:
+                all_files_exist = False
+    return all_files_exist
 
 
 def main():
     file_name = "phonebook.csv"
     commands = {
         "q": lambda: print("До свидания!"),
-        "w": lambda: write_file(file_name) if exists(file_name) else create_file(file_name) or write_file(file_name),
-        "r": lambda: print("\n".join(map(str, read_file(file_name)))) if exists(file_name) else print("Файл "
-                                                                                                      "отсутствует, "
-                                                                                                      "пожалуйста "
-                                                                                                      "создайте файл."),
+        "w": lambda: write_file(file_name),
+        "r": lambda: print_file(file_name),
         "d": lambda: remove_row(file_name),
-        "c": lambda: copy_data(file_name, input("Введите название нового файла: ") + ".csv"),
-        "f": lambda: find_record(file_name),
-        "cr": lambda: copy_row(file_name, input("Введите название файла, в который хотите скопировать: ") + ".csv")
+        "c": lambda: copy_data(file_name),
+        "f": lambda: find_record(file_name)
     }
 
     while True:
         command = input("\n1. Для выхода из программы - 'q'\n2. Для записи данных - 'w'\n3. Для "
-                        "чтения данных - 'r'\n4. Для удаления данных - 'd'\n5. Для копирования файла - 'c'\n6. Для "
-                        "поиска данных - 'f'\n7. Для копии определенной строки в другой файл - 'cr'. "
-                        "\nВведите команду: ").lower()
+                        "чтения данных - 'r'\n4. Для удаления данных - 'd'\n5. Для копирования - 'c'\n6. Для "
+                        "поиска данных - 'f'\nВведите команду: ").lower()
         if command in commands:
             if command == "q":
                 commands[command]()
@@ -160,4 +197,7 @@ def main():
             print("Некорректная команда, попробуйте снова.")
 
 
-main()
+if __name__ == "__main__":
+    main()
+
+# to do list: пофиксить, если в строке написали пробел, а цифру не поставили и если в списке одинаковые цифры
