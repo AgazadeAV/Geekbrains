@@ -40,8 +40,8 @@ def write_file(file_name):
     if res is None:
         count = 1
     else:
-        count = str(len(res) + 1)
-    new_obj = {'№': count, 'first_name': user_data[0], 'second_name': user_data[1], 'phone_number': user_data[2]}
+        count = len(res) + 1
+    new_obj = {'№': str(count), 'first_name': user_data[0], 'second_name': user_data[1], 'phone_number': user_data[2]}
     res.append(new_obj)
     standard_write(file_name, res)
     print("Данные успешно записаны.")
