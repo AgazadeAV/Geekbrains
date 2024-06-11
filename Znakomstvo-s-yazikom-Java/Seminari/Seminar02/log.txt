@@ -1,0 +1,28 @@
+июн. 10, 2024 11:51:49 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:08 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:10 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:12 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:16 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:17 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:18 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:19 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:19 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:20 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:20 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:21 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:21 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
+июн. 10, 2024 11:52:22 PM Seminari.Seminar02.Task05 writeArrayToFile
+INFO: Данные успешно записаны.
