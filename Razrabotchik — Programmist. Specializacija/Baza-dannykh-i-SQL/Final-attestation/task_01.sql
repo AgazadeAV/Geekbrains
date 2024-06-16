@@ -1,3 +1,6 @@
+/* Создайте функцию, которая принимает кол-во сек и формат их в кол-во дней часов. 
+Пример: 123456 -> '1 days 10 hours 17 minutes 36 seconds'*/
+
 CREATE DATABASE final_examination;
 USE final_examination;
 
@@ -6,19 +9,19 @@ CREATE FUNCTION format_seconds(seconds INT)
 RETURNS VARCHAR(50)
 DETERMINISTIC
 BEGIN
-  DECLARE days INT;
-  DECLARE hours INT;
-  DECLARE minutes INT;
-  DECLARE seconds_left INT;
-  
-  SET days = FLOOR(seconds / 86400);
-  SET seconds_left = seconds % 86400;
-  SET hours = FLOOR(seconds_left / 3600);
-  SET seconds_left = seconds_left % 3600;
-  SET minutes = FLOOR(seconds_left / 60);
-  SET seconds_left = seconds_left % 60;
-  
-  RETURN CONCAT(days, ' дней ', hours, ' часов ', minutes, ' минут ', seconds_left, ' секунд');
+    DECLARE days INT;
+    DECLARE hours INT;
+    DECLARE minutes INT;
+    DECLARE seconds_left INT;
+    
+    SET days = FLOOR(seconds / 86400);
+    SET seconds_left = seconds % 86400;
+    SET hours = FLOOR(seconds_left / 3600);
+    SET seconds_left = seconds_left % 3600;
+    SET minutes = FLOOR(seconds_left / 60);
+    SET seconds_left = seconds_left % 60;
+    
+    RETURN CONCAT(days, ' дней ', hours, ' часов ', minutes, ' минут ', seconds_left, ' секунд');
 END//
 DELIMITER ;
 
