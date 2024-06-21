@@ -42,6 +42,14 @@ public class Hw2 {
         }
     }
 
+    public static void clearLog() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("log.txt", false))) {
+            writer.print("");
+        } catch (IOException e) {
+            System.err.println("Failed to clear log file: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         int[] arr = { 9, 3, 4, 8, 2, 5, 7, 1, 6, 10};
         System.out.println("Original array:");
@@ -55,14 +63,6 @@ public class Hw2 {
         System.out.println("Sorted array:");
         for (int i : arr) {
             System.out.print(i + " ");
-        }
-    }
-
-    public static void clearLog() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("log.txt", false))) {
-            writer.print("");
-        } catch (IOException e) {
-            System.err.println("Failed to clear log file: " + e.getMessage());
         }
     }
 }
