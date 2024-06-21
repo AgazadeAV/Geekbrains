@@ -51,7 +51,7 @@ public class Hw2 {
     }
 
     public static void main(String[] args) {
-        int[] arr = { 9, 3, 4, 8, 2, 5, 7, 1, 6, 10};
+        int[] arr = { 9, 3, 4, 8, 2, 5, 7, 1, 6, 10 };
         System.out.println("Original array:");
         for (int i : arr) {
             System.out.print(i + " ");
