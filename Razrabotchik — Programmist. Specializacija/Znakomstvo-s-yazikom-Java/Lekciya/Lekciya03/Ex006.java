@@ -3,6 +3,7 @@ package Lekciya.Lekciya03;
 import java.util.List;
 
 public class Ex006 {
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
         Character value = null;
         List<Character> list1 = List.of('S', 'e', 'r', 'g', 'e', 'y');
