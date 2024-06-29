@@ -10,6 +10,22 @@ public class LaptopFilter {
         laptops.add(new Laptop("ModelB", 16, 256, "Windows", "Silver"));
         laptops.add(new Laptop("ModelC", 8, 1024, "Linux", "Black"));
         laptops.add(new Laptop("ModelD", 4, 512, "MacOS", "White"));
+        laptops.add(new Laptop("ModelE", 8, 256, "Windows", "Red"));
+        laptops.add(new Laptop("ModelF", 16, 512, "Linux", "Silver"));
+        laptops.add(new Laptop("ModelG", 32, 1024, "Windows", "Black"));
+        laptops.add(new Laptop("ModelH", 8, 128, "MacOS", "White"));
+        laptops.add(new Laptop("ModelI", 4, 256, "Linux", "Black"));
+        laptops.add(new Laptop("ModelJ", 8, 512, "Windows", "Blue"));
+        laptops.add(new Laptop("ModelK", 16, 1024, "Linux", "Red"));
+        laptops.add(new Laptop("ModelL", 32, 2048, "MacOS", "Silver"));
+        laptops.add(new Laptop("ModelM", 4, 128, "Windows", "Black"));
+        laptops.add(new Laptop("ModelN", 8, 256, "Linux", "White"));
+        laptops.add(new Laptop("ModelO", 16, 512, "Windows", "Red"));
+        laptops.add(new Laptop("ModelP", 32, 1024, "MacOS", "Black"));
+        laptops.add(new Laptop("ModelQ", 8, 2048, "Linux", "Silver"));
+        laptops.add(new Laptop("ModelR", 16, 256, "Windows", "Blue"));
+        laptops.add(new Laptop("ModelS", 4, 512, "MacOS", "White"));
+        laptops.add(new Laptop("ModelT", 32, 128, "Linux", "Black"));
 
         // Хранение доступных критериев фильтрации
         Map<Integer, String> criteriaMap = new HashMap<>();
@@ -29,7 +45,7 @@ public class LaptopFilter {
                 if (!filters.isEmpty()) {
                     System.out.println("Выбранные критерии:");
                     for (Map.Entry<String, String> entry : filters.entrySet()) {
-                        System.out.println(STR."\{entry.getKey()}: \{entry.getValue()}");
+                        System.out.println(entry.getKey() + ": " + entry.getValue());
                     }
                 }
                 // Вывод доступных критериев фильтрации
