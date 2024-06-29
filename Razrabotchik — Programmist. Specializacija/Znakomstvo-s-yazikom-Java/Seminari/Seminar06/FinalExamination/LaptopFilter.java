@@ -22,32 +22,45 @@ public class LaptopFilter {
         // Хранение параметров фильтрации
         Map<String, String> filters = new HashMap<>();
 
-        // Вывод доступных критериев фильтрации
-        System.out.println("Введите цифру, соответствующую необходимому критерию:");
-        System.out.println("1 - ОЗУ");
-        System.out.println("2 - Объем ЖД");
-        System.out.println("3 - Операционная система");
-        System.out.println("4 - Цвет");
-
         // Запрос критериев фильтрации у пользователя
         while (true) {
-            int criterion = scanner.nextInt();
-            if (criteriaMap.containsKey(criterion)) {
-                String criterionKey = criteriaMap.get(criterion);
-                System.out.println("Введите минимальное значение для " + criterionKey + ":");
-                String value = scanner.next();
-                filters.put(criterionKey, value);
-            } else {
-                System.out.println("Неверный критерий. Повторите ввод.");
-            }
+            try {
+                // Вывод текущих выбранных критериев
+                if (!filters.isEmpty()) {
+                    System.out.println("Выбранные критерии:");
+                    for (Map.Entry<String, String> entry : filters.entrySet()) {
+                        System.out.println(STR."\{entry.getKey()}: \{entry.getValue()}");
+                    }
+                }
+                // Вывод доступных критериев фильтрации
+                System.out.println("Введите цифру, соответствующую необходимому критерию:");
+                System.out.println("1 - ОЗУ");
+                System.out.println("2 - Объем ЖД");
+                System.out.println("3 - Операционная система");
+                System.out.println("4 - Цвет");
 
-            // Запрос на продолжение ввода критериев
-            System.out.println("Продолжить ввод критериев? (да/нет)");
-            String continueInput = scanner.next();
-            if (continueInput.equalsIgnoreCase("нет")) {
-                break;
+                int criterion = scanner.nextInt();
+                if (criteriaMap.containsKey(criterion)) {
+                    String criterionKey = criteriaMap.get(criterion);
+                    System.out.println("Введите значение для " + criterionKey + ":");
+                    String value = scanner.next();
+                    filters.put(criterionKey, value);
+                } else {
+                    System.out.println("Неверный критерий. Повторите ввод.");
+                }
+
+                // Запрос на продолжение ввода критериев
+                System.out.println("Продолжить ввод критериев? (да/нет)");
+                String continueInput = scanner.next();
+                if (continueInput.equalsIgnoreCase("нет")) {
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Произошла ошибка ввода: " + e.getMessage());
+                scanner.nextLine(); // очистка сканера
             }
         }
+        scanner.close();
 
         // Фильтрация ноутбуков по введенным критериям
         Set<Laptop> filteredLaptops = filterLaptops(laptops, filters);
@@ -72,22 +85,21 @@ public class LaptopFilter {
 
             switch (key) {
                 case "ram":
-                    int minRam = Integer.parseInt(value); // Минимальное значение ОЗУ
-                    filteredLaptops.removeIf(laptop -> laptop.ram < minRam);
+                    int ram = Integer.parseInt(value);
+                    filteredLaptops.removeIf(laptop -> laptop.ram != ram);
                     break;
                 case "hdd":
-                    int minHdd = Integer.parseInt(value); // Минимальное значение жесткого диска
-                    filteredLaptops.removeIf(laptop -> laptop.hdd < minHdd);
+                    int hdd = Integer.parseInt(value);
+                    filteredLaptops.removeIf(laptop -> laptop.hdd != hdd);
                     break;
                 case "os":
-                    filteredLaptops.removeIf(laptop -> !laptop.os.equalsIgnoreCase(value)); // Операционная система
+                    filteredLaptops.removeIf(laptop -> !laptop.os.equalsIgnoreCase(value));
                     break;
                 case "color":
-                    filteredLaptops.removeIf(laptop -> !laptop.color.equalsIgnoreCase(value)); // Цвет
+                    filteredLaptops.removeIf(laptop -> !laptop.color.equalsIgnoreCase(value));
                     break;
             }
         }
-
         return filteredLaptops;
     }
 }
