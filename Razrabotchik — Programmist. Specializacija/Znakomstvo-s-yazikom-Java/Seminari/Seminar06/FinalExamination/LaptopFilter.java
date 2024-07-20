@@ -93,7 +93,7 @@ public class LaptopFilter {
     }
 
     // Метод для фильтрации ноутбуков по введенным критериям
-    public Set<Laptop> filterLaptops(Set<Laptop> laptops, Map<String, String> filters) {
+    public static Set<Laptop> filterLaptops(Set<Laptop> laptops, Map<String, String> filters) {
         Set<Laptop> filteredLaptops = new HashSet<>(laptops);
 
         // Применение каждого фильтра
