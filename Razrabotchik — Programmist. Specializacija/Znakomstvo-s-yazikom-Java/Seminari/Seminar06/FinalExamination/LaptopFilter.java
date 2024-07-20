@@ -56,10 +56,12 @@ public class LaptopFilter {
                 System.out.println("4 - Цвет");
 
                 int criterion = scanner.nextInt();
+                scanner.nextLine(); // очистка сканера
+
                 if (criteriaMap.containsKey(criterion)) {
                     String criterionKey = criteriaMap.get(criterion);
                     System.out.println("Введите значение для " + criterionKey + ":");
-                    String value = scanner.next();
+                    String value = scanner.nextLine();
                     filters.put(criterionKey, value);
                 } else {
                     System.out.println("Неверный критерий. Повторите ввод.");
@@ -67,19 +69,19 @@ public class LaptopFilter {
 
                 // Запрос на продолжение ввода критериев
                 System.out.println("Продолжить ввод критериев? (да/нет)");
-                String continueInput = scanner.next();
-                if (continueInput.equalsIgnoreCase("нет")) {
+                String continueInput = scanner.nextLine();
+                if (!continueInput.equalsIgnoreCase("да")) {
                     break;
                 }
-            } catch (Exception e) {
-                System.out.println("Произошла ошибка ввода: " + e.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println("Неверный формат ввода. Повторите попытку.");
                 scanner.nextLine(); // очистка сканера
             }
         }
         scanner.close();
 
         // Фильтрация ноутбуков по введенным критериям
-        Set<Laptop> filteredLaptops = filterLaptops(laptops, filters);
+        Set<Laptop> filteredLaptops = filterLaptops(new HashSet<>(laptops), filters);
         if (filteredLaptops.isEmpty()) {
             System.out.println("Нет ноутбуков, соответствующих указанным критериям.");
         } else {
@@ -91,7 +93,7 @@ public class LaptopFilter {
     }
 
     // Метод для фильтрации ноутбуков по введенным критериям
-    public static Set<Laptop> filterLaptops(Set<Laptop> laptops, Map<String, String> filters) {
+    public Set<Laptop> filterLaptops(Set<Laptop> laptops, Map<String, String> filters) {
         Set<Laptop> filteredLaptops = new HashSet<>(laptops);
 
         // Применение каждого фильтра
@@ -102,17 +104,17 @@ public class LaptopFilter {
             switch (key) {
                 case "ram":
                     int ram = Integer.parseInt(value);
-                    filteredLaptops.removeIf(laptop -> laptop.ram != ram);
+                    filteredLaptops.removeIf(laptop -> laptop.getRam() != ram);
                     break;
                 case "hdd":
                     int hdd = Integer.parseInt(value);
-                    filteredLaptops.removeIf(laptop -> laptop.hdd != hdd);
+                    filteredLaptops.removeIf(laptop -> laptop.getHdd() != hdd);
                     break;
                 case "os":
-                    filteredLaptops.removeIf(laptop -> !laptop.os.equalsIgnoreCase(value));
+                    filteredLaptops.removeIf(laptop -> !laptop.getOs().equalsIgnoreCase(value));
                     break;
                 case "color":
-                    filteredLaptops.removeIf(laptop -> !laptop.color.equalsIgnoreCase(value));
+                    filteredLaptops.removeIf(laptop -> !laptop.getColor().equalsIgnoreCase(value));
                     break;
             }
         }
