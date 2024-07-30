@@ -4,10 +4,8 @@ public class App {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        FileWriterUtil fileWriterUtil = new FileWriterUtil();
-
         while (true) {
-            try {
+            try (FileWriterUtil fileWriterUtil = new FileWriterUtil()) {
                 System.out.println("Введите данные в произвольном порядке (Фамилия Имя Отчество, Дата рождения, " +
                         "Номер телефона, Пол):");
                 String inputLine = scanner.nextLine();
@@ -31,8 +29,6 @@ public class App {
                 break;
             }
         }
-
-        fileWriterUtil.closeWriters();
         scanner.close();
     }
 }
