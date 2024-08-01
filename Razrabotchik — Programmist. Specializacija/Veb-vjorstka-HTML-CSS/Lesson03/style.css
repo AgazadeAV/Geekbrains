@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    margin-top: 39px;
+    margin-bottom: 84px;
+    padding-top: 11px;
+    padding-bottom: 12px;
+    height: 40px;
+}
+
+.head__logo {
+    margin-right: 500px;
+}
+
+.header__link {
+    text-decoration: none;
+}
+
+.main {
+    margin-bottom: 162px;
+}
+
+.content__heading {
+    margin-bottom: 17px;
+    margin-right: 39px;
+}
+
+.buttons {
+    margin-top: 37px;
+}
+
+.footer {
+    padding-top: 97px;
+    padding-bottom: 96px;
+    padding-left: 345px;
+}
