@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.hero-section {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    min-width: 1175px;
+    padding: 40px 372px 100px;
+    background: white;
+}
+
+.header-section {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 9px;
+}
+
+.horizontal-flex-container {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.image-container-styled {
+    box-sizing: border-box;
+    display: block;
+    width: 35px;
+    max-width: initial;
+    height: 40px;
+    border: none;
+    object-fit: cover;
+}
+
+.text-block {
+    box-sizing: border-box;
+    display: block;
+    width: 86px;
+    max-width: initial;
+    height: 17.5px;
+    margin-left: 15px;
+}
+
+.horizontal-nav-list1 {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    gap: 32px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.highlighted-text {
+    flex: 0 0 auto;
+    padding: 0;
+    margin: 0;
+    font: 600 14px Inter, sans-serif;
+    color: #f25822;
+}
+
+.hierarchical-text-block {
+    flex: 0 0 auto;
+    padding: 0;
+    margin: 0;
+    font: 400 14px Inter, sans-serif;
+    color: black;
+}
+
+.svg-container {
+    display: flex;
+    flex: 0 0 auto;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+}
+
+.horizontal-nav-list {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    gap: 32px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 33px;
+}
+
+.marketing-section {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    gap: 8px;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 84px;
+}
+
+.marketing-section1 {
+    flex: 0 0 auto;
+}
+
+.hero-text-block {
+    padding: 0;
+    margin: 0;
+    font: 700 60px/72px Inter, sans-serif;
+    color: black;
+    text-align: left;
+}
+
+.marketing-content-style {
+    padding: 0;
+    margin: 0;
+    margin-top: 20px;
+    font: 400 20px/28px Inter, sans-serif;
+    color: #888888;
+    text-align: left;
+}
+
+.call-to-action-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 32px;
+}
+
+.call-to-action-btn {
+    box-sizing: border-box;
+    display: block;
+    flex: 0 0 auto;
+    width: 140px;
+    min-width: 140px;
+    height: 51px;
+    font: 600 16px Inter, sans-serif;
+    color: white;
+    cursor: pointer;
+    background: #f25822;
+    border: none;
+    border-radius: 56px;
+    box-shadow: 4px 4px 8px rgba(242, 88, 34, 0.2);
+}
+
+.primary-button {
+    box-sizing: border-box;
+    display: block;
+    flex: 0 0 auto;
+    width: 140px;
+    min-width: 140px;
+    height: 51px;
+    font: 600 16px Inter, sans-serif;
+    color: white;
+    cursor: pointer;
+    background: #f25822;
+    border: none;
+    border-radius: 56px;
+    box-shadow: 4px 4px 8px rgba(242, 88, 34, 0.2);
+  }
+
+.video-caption-style {
+    flex: 0 0 auto;
+    padding: 0;
+    margin: 0;
+    margin-left: 47px;
+    font: 600 16px Inter, sans-serif;
+    color: #aaaaaa;
+}
+
+.hero-image-container {
+    box-sizing: border-box;
+    display: block;
+    width: 545px;
+    max-width: initial;
+    height: 375px;
+    border: none;
+    object-fit: cover;
+}
+
+.vertical-centered-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 1920px;
+    background: white;
+}
+
+.horizontal-image-gallery {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 1174px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.image-grid-item {
+    box-sizing: border-box;
+    display: block;
+    width: 160px;
+    max-width: initial;
+    height: 50px;
+    border: none;
+    object-fit: cover;
+}
