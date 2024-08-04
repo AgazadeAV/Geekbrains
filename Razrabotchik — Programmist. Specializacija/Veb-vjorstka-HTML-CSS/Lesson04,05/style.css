@@ -7,7 +7,7 @@ a {
     text-decoration: none;
 }
 
-.hero-section {
+.top {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@ a {
     background: white;
 }
 
-.header-section {
+.header {
     display: flex;
     flex: 0 0 auto;
     flex-direction: row;
@@ -28,7 +28,7 @@ a {
     padding-right: 9px;
 }
 
-.horizontal-flex-container {
+.header__logo {
     display: flex;
     flex: 0 0 auto;
     flex-direction: row;
@@ -36,7 +36,15 @@ a {
     justify-content: flex-start;
 }
 
-.image-container-styled {
+.header__menu {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logo__photo {
     box-sizing: border-box;
     display: block;
     width: 35px;
@@ -46,7 +54,7 @@ a {
     object-fit: cover;
 }
 
-.text-block {
+.logo__text {
     box-sizing: border-box;
     display: block;
     width: 86px;
@@ -55,7 +63,7 @@ a {
     margin-left: 15px;
 }
 
-.horizontal-nav-list1 {
+.header__menu1 {
     display: flex;
     flex: 0 0 auto;
     flex-direction: row;
@@ -64,7 +72,7 @@ a {
     justify-content: flex-start;
 }
 
-.highlighted-text {
+.menu__home {
     flex: 0 0 auto;
     padding: 0;
     margin: 0;
@@ -72,7 +80,7 @@ a {
     color: #f25822;
 }
 
-.hierarchical-text-block {
+.menu__nav {
     flex: 0 0 auto;
     padding: 0;
     margin: 0;
@@ -80,7 +88,7 @@ a {
     color: black;
 }
 
-.svg-container {
+.svg__checkmark {
     display: flex;
     flex: 0 0 auto;
     width: 10px;
@@ -88,7 +96,7 @@ a {
     margin-left: 5px;
 }
 
-.horizontal-nav-list {
+.header__menu2 {
     display: flex;
     flex: 0 0 auto;
     flex-direction: row;
@@ -98,7 +106,7 @@ a {
     margin-left: 33px;
 }
 
-.marketing-section {
+.content {
     display: flex;
     flex: 0 0 auto;
     flex-direction: row;
@@ -108,11 +116,12 @@ a {
     margin-top: 84px;
 }
 
-.marketing-section1 {
+.left__content {
     flex: 0 0 auto;
 }
 
-.hero-text-block {
+.title {
+    width: 558px;
     padding: 0;
     margin: 0;
     font: 700 60px/72px Inter, sans-serif;
@@ -120,7 +129,8 @@ a {
     text-align: left;
 }
 
-.marketing-content-style {
+.text {
+    width: 558px;
     padding: 0;
     margin: 0;
     margin-top: 20px;
@@ -129,7 +139,7 @@ a {
     text-align: left;
 }
 
-.call-to-action-section {
+.content__buttons {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -137,7 +147,7 @@ a {
     margin-top: 32px;
 }
 
-.call-to-action-btn {
+.start__button {
     box-sizing: border-box;
     display: block;
     flex: 0 0 auto;
@@ -153,32 +163,22 @@ a {
     box-shadow: 4px 4px 8px rgba(242, 88, 34, 0.2);
 }
 
-.primary-button {
+.watch__button {
     box-sizing: border-box;
     display: block;
     flex: 0 0 auto;
     width: 140px;
     min-width: 140px;
     height: 51px;
-    font: 600 16px Inter, sans-serif;
-    color: white;
-    cursor: pointer;
-    background: #f25822;
-    border: none;
-    border-radius: 56px;
-    box-shadow: 4px 4px 8px rgba(242, 88, 34, 0.2);
-  }
-
-.video-caption-style {
-    flex: 0 0 auto;
-    padding: 0;
-    margin: 0;
-    margin-left: 47px;
     font: 600 16px Inter, sans-serif;
     color: #aaaaaa;
+    cursor: pointer;
+    background: white;
+    border: none;
+    border-radius: 56px;
 }
 
-.hero-image-container {
+.right__content {
     box-sizing: border-box;
     display: block;
     width: 545px;
@@ -188,7 +188,7 @@ a {
     object-fit: cover;
 }
 
-.vertical-centered-container {
+.footer {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -198,7 +198,7 @@ a {
     background: white;
 }
 
-.horizontal-image-gallery {
+.footer__images {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -210,7 +210,7 @@ a {
     padding-bottom: 100px;
 }
 
-.image-grid-item {
+.images {
     box-sizing: border-box;
     display: block;
     width: 160px;
