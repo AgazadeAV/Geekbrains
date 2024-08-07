@@ -17,9 +17,6 @@ body {
 
 /* basic divs */
 
-.top {
-    /* width: 100vw; */
-}
 
 .header {
     /* width: 100vw; */
@@ -44,7 +41,6 @@ body {
     align-items: center;
 }
 
-.cart {}
 
 .top-content {
     height: calc(110vh - 75px);
@@ -182,10 +178,6 @@ body {
     gap: 30px;
 }
 
-.item {
-    /* border: 1px solid #000; */
-}
-
 .big {
     grid-column: 1 / span 3;
 }
@@ -206,7 +198,6 @@ body {
     align-items: center;
 }
 
-.bottom-main {}
 
 .bottom-grid {
     display: grid;
@@ -238,9 +229,6 @@ body {
 
 
 /* imgs */
-
-.bott-img {}
-
 
 /* text  */
 
@@ -433,4 +421,3 @@ body {
     align-items: center;
     justify-content: center;
 }
-
