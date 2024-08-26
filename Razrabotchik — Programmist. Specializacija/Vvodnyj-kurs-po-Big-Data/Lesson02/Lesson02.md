@@ -1,139 +1,112 @@
-### 1. Сбор данных о погоде
+## Задание:
 
-Мы начнем с того, что соберем данные о погоде в различных городах мира за последний месяц. Для этого мы будем использовать API OpenWeatherMap. Вот как мы это сделаем:
+Ознакомиться с библиотеками для распараллеливания задач в Python:
+1. `multiprocessing`
+2. `joblib`
+3. `dask`
 
-#### Шаг 1: Написание скрипта на Python
 
-Сначала мы напишем Python-скрипт для сбора данных. Вот пример кода, который мы будем использовать:
+Каждая из указанных библиотек для распараллеливания задач в Python имеет свои особенности и области применения. Вот краткий обзор каждой из них:
 
-```python
-import requests
-import pandas as pd
-from datetime import datetime
+### 1. `multiprocessing`
 
-# Конфигурация API
-API_KEY = 'YOUR_API_KEY'
-CITIES = ['New York', 'London', 'Tokyo', 'Paris', 'Sydney']
-BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
+**Описание**:
+- Встроенная библиотека Python для параллельного выполнения задач.
+- Создает отдельные процессы, которые могут выполняться параллельно и независимо друг от друга.
+- Каждый процесс имеет свое собственное пространство памяти, что позволяет избежать проблем с глобальной интерпретаторной блокировкой (GIL).
 
-def fetch_weather_data(city):
-    response = requests.get(BASE_URL, params={
-        'q': city,
-        'appid': API_KEY,
-        'units': 'metric'
-    })
-    data = response.json()
-    return {
-        'city': city,
-        'temperature': data['main']['temp'],
-        'date': datetime.now().strftime('%Y-%m-%d')
-    }
+**Основные компоненты**:
+- `Process`: для создания и управления отдельными процессами.
+- `Pool`: для управления пулом процессов и выполнения задач в параллельных процессах.
+- `Queue` и `Pipe`: для межпроцессного взаимодействия.
 
-weather_data = []
-
-# Сбор данных
-for city in CITIES:
-    data = fetch_weather_data(city)
-    weather_data.append(data)
-
-# Создание DataFrame
-df = pd.DataFrame(weather_data)
-df.to_csv('weather_data.csv', index=False)
-```
-
-Мы запускаем этот скрипт, который собирает данные о температуре в указанных городах и сохраняет их в файл `weather_data.csv`.
-
-### 2. Построение графиков
-
-Теперь мы визуализируем собранные данные. Мы используем библиотеки Matplotlib и Seaborn для построения графиков:
-
-#### График изменения температуры
+**Пример использования**:
 
 ```python
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+from multiprocessing import Pool
 
-# Загрузка данных
-df = pd.read_csv('weather_data.csv')
+def square(x):
+    return x * x
 
-# График изменения температуры
-plt.figure(figsize=(10, 6))
-sns.lineplot(data=df, x='date', y='temperature', hue='city', marker='o')
-plt.title('Изменение температуры в разных городах')
-plt.xlabel('Дата')
-plt.ylabel('Температура (°C)')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig('temperature_trend.png')
-plt.show()
+if __name__ == '__main__':
+    with Pool(4) as p:
+        results = p.map(square, [1, 2, 3, 4, 5])
+    print(results)
 ```
 
-#### График распределения температуры
+**Преимущества**:
+- Подходит для CPU-bound задач.
+- Прост в использовании для базовых случаев.
+
+**Ограничения**:
+- Процессы создаются с некоторыми накладными расходами.
+- Использование может быть сложным для задач с большим объемом данных, из-за необходимости обмена данными между процессами.
+
+### 2. `joblib`
+
+**Описание**:
+- Библиотека для параллельного выполнения задач, особенно полезная в контексте машинного обучения и научных вычислений.
+- Основное внимание уделяет удобству сохранения и загрузки данных, а также поддерживает кэширование результатов.
+
+**Основные компоненты**:
+- `Parallel`: для распараллеливания вычислений.
+- `delayed`: для ленивого выполнения функций.
+
+**Пример использования**:
 
 ```python
-# График распределения температуры
-plt.figure(figsize=(10, 6))
-sns.histplot(df['temperature'], kde=True, bins=10)
-plt.title('Распределение температуры')
-plt.xlabel('Температура (°C)')
-plt.ylabel('Частота')
-plt.tight_layout()
-plt.savefig('temperature_distribution.png')
-plt.show()
+from joblib import Parallel, delayed
+
+def square(x):
+    return x * x
+
+results = Parallel(n_jobs=4)(delayed(square)(i) for i in [1, 2, 3, 4, 5])
+print(results)
 ```
 
-Мы создаем два графика: один показывающий изменение температуры в разных городах, а другой - распределение температур.
+**Преимущества**:
+- Прост в использовании, особенно в контексте машинного обучения.
+- Поддержка кэширования результатов и удобная работа с большими массивами данных.
 
-### 3. Сохранение результатов в HDFS
+**Ограничения**:
+- Для некоторых задач может быть менее гибким, чем `multiprocessing` или `dask`.
 
-Теперь мы сохраним результаты в HDFS. Для этого мы будем использовать библиотеку PyArrow:
+### 3. `dask`
+
+**Описание**:
+- Более сложная библиотека для параллельных и распределенных вычислений.
+- Подходит для масштабируемых вычислений и обработки больших объемов данных.
+
+**Основные компоненты**:
+- `dask.delayed`: для ленивых вычислений.
+- `dask.distributed`: для распределенных вычислений на нескольких узлах.
+- `dask.array` и `dask.dataframe`: для обработки больших массивов данных и таблиц, аналогичных NumPy и Pandas.
+
+**Пример использования**:
 
 ```python
-from pyarrow import hdfs
+import dask.array as da
 
-# Установление соединения с HDFS
-hdfs_client = hdfs.connect('localhost', 9000)
+# Создание большого массива
+x = da.random.random((10000, 10000), chunks=(1000, 1000))
 
-# Загрузка файлов в HDFS
-with hdfs_client.open('/user/hadoop/weather_data.csv', 'wb') as f:
-    f.write(pd.read_csv('weather_data.csv').to_csv(index=False).encode())
-
-with hdfs_client.open('/user/hadoop/temperature_trend.png', 'wb') as f:
-    with open('temperature_trend.png', 'rb') as local_file:
-        f.write(local_file.read())
-
-with hdfs_client.open('/user/hadoop/temperature_distribution.png', 'wb') as f:
-    with open('temperature_distribution.png', 'rb') as local_file:
-        f.write(local_file.read())
+# Выполнение вычислений
+result = x.sum().compute()
+print(result)
 ```
 
-Мы загружаем все файлы в HDFS, чтобы они были доступны для дальнейшего анализа.
+**Преимущества**:
+- Поддержка распределенных вычислений на кластерах.
+- Подходит для обработки больших объемов данных, которые не помещаются в память.
 
-### 4. Выгрузка результатов из HDFS на локальный компьютер
+**Ограничения**:
+- Может быть избыточным для простых задач.
+- Имеет более сложный API и может требовать дополнительных настроек для распределенных вычислений.
 
-Чтобы выгрузить данные из HDFS на локальный компьютер, мы используем следующий код:
+### Сравнение и выбор:
 
-```python
-# Установление соединения с HDFS
-hdfs_client = hdfs.connect('localhost', 9000)
+- **`multiprocessing`**: Хорош для простых задач с ограниченным количеством данных, где требуется параллельное выполнение.
+- **`joblib`**: Отлично подходит для задач, связанных с машинным обучением и научными вычислениями, с удобным интерфейсом и поддержкой кэширования.
+- **`dask`**: Подходит для больших объемов данных и распределенных вычислений, предоставляет гибкий и масштабируемый подход для обработки данных.
 
-# Выгрузка файлов из HDFS
-with hdfs_client.open('/user/hadoop/weather_data.csv', 'rb') as f:
-    with open('downloaded_weather_data.csv', 'wb') as local_file:
-        local_file.write(f.read())
-
-with hdfs_client.open('/user/hadoop/temperature_trend.png', 'rb') as f:
-    with open('downloaded_temperature_trend.png', 'wb') as local_file:
-        local_file.write(f.read())
-
-with hdfs_client.open('/user/hadoop/temperature_distribution.png', 'rb') as f:
-    with open('downloaded_temperature_distribution.png', 'wb') as local_file:
-        local_file.write(f.read())
-```
-
-Теперь мы можем получить файлы из HDFS и использовать их локально для дальнейшего анализа.
-
----
-
-Таким образом, мы собрали данные о погоде, визуализировали их, сохранили в HDFS и выгрузили на локальный компьютер. Мы уверены, что все шаги выполнены корректно и результаты готовы для дальнейшего анализа.
+Выбор библиотеки зависит от конкретных требований проекта, объема данных и сложности вычислений.
