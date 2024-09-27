@@ -1,17 +1,18 @@
-# Используем образ OpenJDK 11 для Java
-FROM openjdk:11
+# Используем официальный образ JDK 11
+FROM openjdk:11-jdk
 
-# Устанавливаем директорию, в которую будет копироваться код проекта
+# Установка необходимых пакетов (если потребуется)
+RUN apt-get update && apt-get install -y \
+    && apt-get clean
+
+# Создание рабочей директории
 WORKDIR /app
 
-# Копируем все файлы проекта в контейнер
-COPY . /app
+# Копирование исходного кода в контейнер
+COPY src/ .
 
-# Генерация Javadoc
-RUN javadoc -d ./docs -sourcepath ./src/main/java ru.gb.jcore.sample ru.gb.jcore.regular
+# Запуск Javadoc для генерации документации
+RUN javadoc -d doc -sourcepath ru/gb/jcore/regular:ru/gb/jcore/sample -subpackages ru.gb.jcore
 
-# Устанавливаем том для доступа к сгенерированной документации
-VOLUME ["/app/docs"]
-
-# Команда по умолчанию
-CMD ["echo", "Documentation has been generated in the /app/docs directory"]
+# Указание точки входа (можно изменить на команду для открытия документации)
+CMD ["bash"]
