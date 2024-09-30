@@ -1,3 +1,6 @@
+import hw.LectureHomework;
+import hw.SeminarHomework;
+
 /**
  * Главный класс, содержащий метод main для запуска программы.
  * Этот класс демонстрирует использование методов из классов
@@ -10,7 +13,7 @@ public class Main {
      * @param args аргументы командной строки (не используются)
      */
     public static void main(String[] args) {
-        // Создание экземпляров классов SeminarHomework и LectureHomework
+        // Создание экземпляров классов hw.SeminarHomework и hw.LectureHomework
         SeminarHomework seminarHomework = new SeminarHomework();
         LectureHomework lectureHomework = new LectureHomework();
 
@@ -27,7 +30,7 @@ public class Main {
     /**
      * Метод для вывода результатов семинарских задач.
      *
-     * @param seminarHomework экземпляр класса SeminarHomework
+     * @param seminarHomework экземпляр класса hw.SeminarHomework
      * @param nums массив чисел для обработки
      */
     private static void printSeminarResults(SeminarHomework seminarHomework, int[] nums) {
@@ -47,7 +50,7 @@ public class Main {
     /**
      * Метод для вывода результатов лекционных задач.
      *
-     * @param lectureHomework экземпляр класса LectureHomework
+     * @param lectureHomework экземпляр класса hw.LectureHomework
      */
     private static void printLectureResults(LectureHomework lectureHomework) {
         // Задача 1 лекции: Шифр Цезаря
