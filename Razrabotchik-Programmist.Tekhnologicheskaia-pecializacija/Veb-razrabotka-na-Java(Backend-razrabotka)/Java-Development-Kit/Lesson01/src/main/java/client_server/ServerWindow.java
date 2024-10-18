@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerWindow extends JFrame {
     private static final int POS_X = 500;
@@ -15,6 +17,9 @@ public class ServerWindow extends JFrame {
     private final JButton btnStop = new JButton("Stop");
     private final JTextArea log = new JTextArea();
     private boolean isServerWorking;
+
+    // Список клиентов
+    private final List<ClientGUI> clients = new ArrayList<>();
 
     public ServerWindow() {
         isServerWorking = false;
@@ -67,10 +72,17 @@ public class ServerWindow extends JFrame {
         log.setCaretPosition(log.getDocument().getLength());
     }
 
-    // Метод для получения сообщения от клиента
+    public void addClient(ClientGUI client) {
+        clients.add(client); // Добавляем клиента в список
+    }
+
     public void receiveMessage(String login, String message) {
         if (isServerWorking) {
             appendLog(login + ": " + message + "\n");
+            // Уведомляем всех клиентов о новом сообщении
+            for (ClientGUI client : clients) {
+                client.appendLog(login + ": " + message);
+            }
         }
     }
 }
