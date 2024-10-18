@@ -15,6 +15,7 @@ public class ClientGUI extends JFrame {
 
     private final JTextArea log = new JTextArea();
     private final JList<String> userList = new JList<>();
+    private final ServerWindow serverWindow;  // Ссылка на серверное окно
 
     private final JPanel panelTop = new JPanel(new GridLayout(2, 3));
     private final JTextField tfIPAddress = new JTextField("127.0.0.1");
@@ -27,7 +28,8 @@ public class ClientGUI extends JFrame {
     private final JTextField tfMessage = new JTextField();
     private final JButton btnSend = new JButton("Send");
 
-    public ClientGUI() {
+    public ClientGUI(ServerWindow serverWindow) { // Передаем серверное окно в конструктор
+        this.serverWindow = serverWindow; // Инициализация ссылки на серверное окно
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(WIDTH, HEIGHT);
@@ -77,9 +79,12 @@ public class ClientGUI extends JFrame {
 
     private void sendMessage() {
         String message = tfMessage.getText().trim();
+        String login = tfLogin.getText(); // Получаем логин пользователя
         if (!message.isEmpty()) {
+            String fullMessage = login + ": " + message; // Форматируем сообщение
             appendLog("You: " + message + "\n");
-            saveMessageToFile(message);
+            serverWindow.receiveMessage(login, message); // Отправляем сообщение на сервер
+            saveMessageToFile(fullMessage); // Сохраняем полное сообщение в файл
             tfMessage.setText("");
         }
     }
@@ -91,7 +96,7 @@ public class ClientGUI extends JFrame {
 
     private void saveMessageToFile(String message) {
         try (FileWriter writer = new FileWriter("chat_history.txt", true)) {
-            writer.write(message + "\n");
+            writer.write(message + "\n"); // Сохраняем в формате "логин: сообщение"
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -66,4 +66,11 @@ public class ServerWindow extends JFrame {
         log.append(message);
         log.setCaretPosition(log.getDocument().getLength());
     }
+
+    // Метод для получения сообщения от клиента
+    public void receiveMessage(String login, String message) {
+        if (isServerWorking) {
+            appendLog(login + ": " + message + "\n");
+        }
+    }
 }
