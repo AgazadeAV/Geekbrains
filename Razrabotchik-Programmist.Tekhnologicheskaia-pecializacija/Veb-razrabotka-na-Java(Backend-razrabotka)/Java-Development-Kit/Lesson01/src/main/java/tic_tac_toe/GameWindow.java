@@ -1,4 +1,4 @@
-package lecture_homework;
+package tic_tac_toe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameWindow extends JFrame {
+    private static final String TITLE = "Крестики-нолики";
+    private static final String START_NEW_GAME = "Начать новую игру";
+    private static final String EXIT = "Выйти";
+
     private static final int WINDOW_HEIGHT = 500;
     private static final int WINDOW_WIDTH = 500;
 
@@ -13,7 +17,7 @@ public class GameWindow extends JFrame {
     private final Map gameMap;
 
     public GameWindow() {
-        setTitle("Крестики-нолики");
+        setTitle(TITLE);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -21,8 +25,8 @@ public class GameWindow extends JFrame {
         gameMap = new Map();
         settingsWindow = new SettingsWindow(this);
 
-        JButton btnStart = new JButton("Начать новую игру");
-        JButton btnExit = new JButton("Выйти");
+        JButton btnStart = new JButton(START_NEW_GAME);
+        JButton btnExit = new JButton(EXIT);
 
         btnStart.addActionListener(new ActionListener() {
             @Override

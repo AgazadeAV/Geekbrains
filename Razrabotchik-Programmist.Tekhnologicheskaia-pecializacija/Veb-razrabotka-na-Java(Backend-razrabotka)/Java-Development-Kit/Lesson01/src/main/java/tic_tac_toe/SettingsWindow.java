@@ -1,10 +1,16 @@
-package lecture_homework;
+package tic_tac_toe;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SettingsWindow extends JFrame {
+    private static final String START_NEW_GAME = "Начать новую игру";
+    private static final String GAME_SETTINGS = "Настройки игры";
+    private static final String PLAYER_VS_AI = "Игрок против ИИ";
+    private static final String PLAYER_VS_PLAYER = "Игрок против Игрока";
+    private static final String FIELD_SIZE = "Размер поля:";
+
     private static final int WINDOW_HEIGHT = 230;
     private static final int WINDOW_WIDTH = 350;
 
@@ -12,17 +18,17 @@ public class SettingsWindow extends JFrame {
     private JRadioButton rbHumanVsAi;
     private JRadioButton rbHumanVsHuman;
 
-    JButton btnStart = new JButton("Начать новую игру");
+    JButton btnStart = new JButton(START_NEW_GAME);
 
     SettingsWindow(GameWindow gameWindow) {
         setLocationRelativeTo(gameWindow);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setTitle("Настройки игры");
+        setTitle(GAME_SETTINGS);
 
         spFieldSize = new JSpinner(new SpinnerNumberModel(3, 3, 5, 1));
 
-        rbHumanVsAi = new JRadioButton("Игрок против ИИ", true);
-        rbHumanVsHuman = new JRadioButton("Игрок против Игрока");
+        rbHumanVsAi = new JRadioButton(PLAYER_VS_AI, true);
+        rbHumanVsHuman = new JRadioButton(PLAYER_VS_PLAYER);
 
         ButtonGroup gameModeGroup = new ButtonGroup();
         gameModeGroup.add(rbHumanVsAi);
@@ -40,7 +46,7 @@ public class SettingsWindow extends JFrame {
         });
 
         JPanel panel = new JPanel();
-        panel.add(new JLabel("Размер поля:"));
+        panel.add(new JLabel(FIELD_SIZE));
         panel.add(spFieldSize);
         panel.add(btnStart);
         panel.add(rbHumanVsAi);

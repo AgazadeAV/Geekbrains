@@ -1,4 +1,4 @@
-package lecture_homework;
+package tic_tac_toe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,6 +7,12 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class Map extends JPanel {
+    private static final String PLAYER1_WIN = "Победил Игрок 1!";
+    private static final String PLAYER2_WIN = "Победил Игрок 2!";
+    private static final String HUMAN_WIN = "Человек победил!";
+    private static final String AI_WIN = "Компьютер победил!";
+    private static final String DRAW = "Ничья!";
+
     public static final int MODE_HUMAN_VS_AI = 0;
     public static final int MODE_HUMAN_VS_HUMAN = 1;
 
@@ -63,15 +69,15 @@ public class Map extends JPanel {
             gameOver = true;
             // Измененные сообщения о победе для режима "Игрок против Игрока"
             String message = (mode == MODE_HUMAN_VS_HUMAN)
-                    ? (isHumanTurn ? "Победил Игрок 1!" : "Победил Игрок 2!")
-                    : (isHumanTurn ? "Человек победил!" : "Компьютер победил!");
+                    ? (isHumanTurn ? PLAYER1_WIN : PLAYER2_WIN)
+                    : (isHumanTurn ? HUMAN_WIN : AI_WIN);
             showGameOverMessage(message);
             return;
         }
 
         if (isFull()) {
             gameOver = true;
-            showGameOverMessage("Ничья!");
+            showGameOverMessage(DRAW);
             return;
         }
 
@@ -94,12 +100,12 @@ public class Map extends JPanel {
 
         if (checkWin(CELL_O)) {
             gameOver = true;
-            showGameOverMessage("Компьютер победил!");
+            showGameOverMessage(AI_WIN);
         }
 
         if (isFull()) {
             gameOver = true;
-            showGameOverMessage("Ничья!");
+            showGameOverMessage(DRAW);
         }
 
         isHumanTurn = true;
