@@ -16,6 +16,7 @@ public class ServerWindow extends JFrame {
     private final JButton btnStart = new JButton("Start");
     private final JButton btnStop = new JButton("Stop");
     private final JTextArea log = new JTextArea();
+    private final JLabel statusLabel = new JLabel("Server is OFF", SwingConstants.CENTER); // Надпись о состоянии сервера
     private boolean isServerWorking;
 
     // Список клиентов
@@ -27,6 +28,11 @@ public class ServerWindow extends JFrame {
         log.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(log);
 
+        // Настройка надписи о состоянии сервера
+        statusLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Устанавливаем размер и стиль шрифта
+        statusLabel.setForeground(Color.RED); // Устанавливаем красный цвет
+        updateStatusLabel(); // Обновляем надпись
+
         btnStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,6 +41,7 @@ public class ServerWindow extends JFrame {
                 } else {
                     isServerWorking = false;
                     appendLog("Server stopped: " + isServerWorking + "\n");
+                    updateStatusLabel(); // Обновляем надпись
                 }
             }
         });
@@ -47,6 +54,7 @@ public class ServerWindow extends JFrame {
                 } else {
                     isServerWorking = true;
                     appendLog("Server started: " + isServerWorking + "\n");
+                    updateStatusLabel(); // Обновляем надпись
                 }
             }
         });
@@ -64,12 +72,23 @@ public class ServerWindow extends JFrame {
         buttonPanel.add(btnStop);
         add(buttonPanel, BorderLayout.SOUTH);
 
+        add(statusLabel, BorderLayout.NORTH); // Добавляем надпись в верхнюю часть окна
+
         setVisible(true);
     }
 
     private void appendLog(String message) {
         log.append(message);
         log.setCaretPosition(log.getDocument().getLength());
+    }
+
+    private void updateStatusLabel() {
+        // Обновляем текст в зависимости от состояния сервера
+        if (isServerWorking) {
+            statusLabel.setText("Server is ON");
+        } else {
+            statusLabel.setText("Server is OFF");
+        }
     }
 
     public void addClient(ClientGUI client) {

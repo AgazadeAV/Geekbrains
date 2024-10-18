@@ -19,7 +19,7 @@ public class ClientGUI extends JFrame {
     private final JPanel panelTop = new JPanel(new GridLayout(2, 3));
     private final JTextField tfIPAddress = new JTextField("127.0.0.1");
     private final JTextField tfPort = new JTextField("8189");
-    private final JTextField tfLogin = new JTextField("azer_agazade");
+    private final JTextField tfLogin = new JTextField();
     private final JPasswordField tfPassword = new JPasswordField("05031995");
     private final JButton btnLogin = new JButton("Login");
 
@@ -32,6 +32,14 @@ public class ClientGUI extends JFrame {
     public ClientGUI(ServerWindow serverWindow) {
         this.serverWindow = serverWindow; // Инициализируем ссылку на сервер
         serverWindow.addClient(this); // Регистрируем клиента на сервере
+
+        // Запрос логина у пользователя
+        String login = JOptionPane.showInputDialog("Введите ваш логин:");
+        if (login == null || login.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Логин не может быть пустым. Приложение будет закрыто.", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+        tfLogin.setText(login); // Устанавливаем введенный логин в текстовое поле
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -84,7 +92,6 @@ public class ClientGUI extends JFrame {
         String message = tfMessage.getText().trim();
         String login = tfLogin.getText(); // Получаем логин пользователя
         if (!message.isEmpty()) {
-            appendLog("You: " + message + "\n");
             serverWindow.receiveMessage(login, message); // Отправляем сообщение на сервер
             saveMessageToFile(login + ": " + message); // Сохраняем полное сообщение в файл
             tfMessage.setText("");
