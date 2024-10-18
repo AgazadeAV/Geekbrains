@@ -9,7 +9,7 @@ public class ClientGUI extends JFrame {
     private static final int WIDTH = 400;
     private static final int HEIGHT = 300;
 
-    private final JTextArea log = new JTextArea();
+    private final JTextArea logArea = new JTextArea();
     private final JTextField tfIPAddress = new JTextField("127.0.0.1");
     private final JTextField tfPort = new JTextField("8189");
     private final JTextField tfLogin = new JTextField();
@@ -22,19 +22,27 @@ public class ClientGUI extends JFrame {
     public ClientGUI(ServerWindow serverWindow) {
         this.serverWindow = serverWindow;
 
-        // Запрос логина у пользователя
+        // Prompt user for login
         String login = JOptionPane.showInputDialog("Введите ваш логин:");
         if (login == null || login.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Логин не может быть пустым. Приложение будет закрыто.", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
+            showError("Логин не может быть пустым. Приложение будет закрыто.");
         }
         tfLogin.setText(login);
 
+        setupWindow();
+        setupComponents();
+        setVisible(true);
+        serverWindow.addClient(this);
+    }
+
+    private void setupWindow() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(WIDTH, HEIGHT);
         setTitle("Chat client");
+    }
 
+    private void setupComponents() {
         JPanel panelTop = new JPanel(new GridLayout(2, 3));
         panelTop.add(tfIPAddress);
         panelTop.add(tfPort);
@@ -43,8 +51,8 @@ public class ClientGUI extends JFrame {
         panelTop.add(btnLogin);
         add(panelTop, BorderLayout.NORTH);
 
-        log.setEditable(false);
-        JScrollPane scrollLog = new JScrollPane(log);
+        logArea.setEditable(false);
+        JScrollPane scrollLog = new JScrollPane(logArea);
         add(scrollLog, BorderLayout.CENTER);
 
         JPanel panelBottom = new JPanel(new BorderLayout());
@@ -52,25 +60,9 @@ public class ClientGUI extends JFrame {
         panelBottom.add(btnSend, BorderLayout.EAST);
         add(panelBottom, BorderLayout.SOUTH);
 
-        // Send message action
-        btnSend.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sendMessage();
-            }
-        });
-
-        // Send message on Enter key press
-        tfMessage.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sendMessage();
-            }
-        });
-
-        serverWindow.addClient(this); // Регистрируем клиента на сервере
-
-        setVisible(true);
+        // Message sending actions
+        btnSend.addActionListener(e -> sendMessage());
+        tfMessage.addActionListener(e -> sendMessage());
     }
 
     private void sendMessage() {
@@ -83,7 +75,12 @@ public class ClientGUI extends JFrame {
     }
 
     public void appendLog(String message) {
-        log.append(message + "\n");
-        log.setCaretPosition(log.getDocument().getLength());
+        logArea.append(message + "\n");
+        logArea.setCaretPosition(logArea.getDocument().getLength());
+    }
+
+    private void showError(String message) {
+        JOptionPane.showMessageDialog(this, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
     }
 }
