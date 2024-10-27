@@ -1,7 +1,5 @@
 package homework;
 
-import lombok.AllArgsConstructor;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +8,6 @@ import java.util.stream.Collectors;
 /**
  * Класс, представляющий справочник сотрудников.
  */
-@AllArgsConstructor
 public class EmployeeBook {
     /**
      * Хранит сотрудников по табельным номерам.
