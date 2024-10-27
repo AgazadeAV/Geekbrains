@@ -26,12 +26,12 @@ public class Employee {
     /**
      * Номер телефона сотрудника.
      */
-    private final String phoneNumber;
+    private String phoneNumber;
 
     /**
      * Стаж работы сотрудника в годах.
      */
-    private final int experience;
+    private int experience;
 
     /**
      * Конструктор для создания нового экземпляра сотрудника.
