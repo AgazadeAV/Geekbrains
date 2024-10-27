@@ -36,9 +36,9 @@ public class Employee {
     /**
      * Конструктор для создания нового экземпляра сотрудника.
      *
-     * @param name         Имя сотрудника.
-     * @param phoneNumber  Номер телефона сотрудника.
-     * @param experience   Стаж работы сотрудника в годах.
+     * @param employeeName         Имя сотрудника.
+     * @param employeePhoneNumber  Номер телефона сотрудника.
+     * @param employeeExperience   Стаж работы сотрудника в годах.
      */
     public Employee(String employeeName, String employeePhoneNumber, int employeeExperience) {
         this.employeeID = ++startPositionForID;
