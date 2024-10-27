@@ -24,12 +24,12 @@ public class EmployeeBook {
     /**
      * Ищет сотрудников по стажу и возвращает список найденных сотрудников.
      *
-     * @param expectedExperience Ожидаемый стаж работы.
+     * @param empoyeeExpectedExperience Ожидаемый стаж работы.
      * @return Список сотрудников с заданным стажем.
      */
-    public List<Employee> searchEmployeeByExperience(int expectedExperience) {
+    public List<Employee> searchEmployeeByExperience(int empoyeeExpectedExperience) {
         return employeeMap.values().stream()
-                .filter(employee -> employee.getExperience() == expectedExperience)
+                .filter(employee -> employee.getEmployeeExperience() == empoyeeExpectedExperience)
                 .collect(Collectors.toList());
     }
 
@@ -41,19 +41,19 @@ public class EmployeeBook {
      */
     public List<String> searchEmployeePhoneNumberByName(String employeeName) {
         return employeeMap.values().stream()
-                .filter(employee -> employee.getName().equals(employeeName))
-                .map(employee -> String.format("Имя сотрудника: %s, его номер: %s", employee.getName(), employee.getPhoneNumber()))
+                .filter(employee -> employee.getEmployeeName().equals(employeeName))
+                .map(employee -> String.format("Имя сотрудника: %s, его номер: %s", employee.getEmployeeName(), employee.getEmployeePhoneNumber()))
                 .collect(Collectors.toList());
     }
 
     /**
      * Ищет сотрудника по табельному номеру.
      *
-     * @param providedId Табельный номер сотрудника.
+     * @param providedEmployeeID Табельный номер сотрудника.
      * @return Объект Employee, если найден, иначе null.
      */
-    public Employee searchEmployeeById(int providedId) {
-        return employeeMap.get(providedId); // Быстрый поиск по табельному номеру
+    public Employee searchEmployeeById(int providedEmployeeID) {
+        return employeeMap.get(providedEmployeeID); // Быстрый поиск по табельному номеру
     }
 
     /**
@@ -63,10 +63,10 @@ public class EmployeeBook {
      * @return true, если добавление прошло успешно, и false, если сотрудник с таким табельным номером уже существует.
      */
     public boolean addEmployeeToEmployeeBook(Employee employee) {
-        if (employeeMap.containsKey(employee.getId())) {
+        if (employeeMap.containsKey(employee.getEmployeeID())) {
             return false; // Сотрудник с таким табельным номером уже существует
         }
-        employeeMap.put(employee.getId(), employee); // Добавление в Map для быстрого поиска
+        employeeMap.put(employee.getEmployeeID(), employee); // Добавление в Map для быстрого поиска
         return true;
     }
 }
