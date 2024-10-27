@@ -2,26 +2,30 @@ package homework;
 
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
  * Класс, представляющий сотрудника.
  */
 @Getter
+@Setter
 @ToString
 public class Employee {
     @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private static int startPositionForID = 0;
 
     /**
      * Уникальный идентификатор сотрудника.
      */
+    @Setter(AccessLevel.NONE)
     private final int employeeID;
 
     /**
      * Имя сотрудника.
      */
-    private final String employeeName;
+    private String employeeName;
 
     /**
      * Номер телефона сотрудника.

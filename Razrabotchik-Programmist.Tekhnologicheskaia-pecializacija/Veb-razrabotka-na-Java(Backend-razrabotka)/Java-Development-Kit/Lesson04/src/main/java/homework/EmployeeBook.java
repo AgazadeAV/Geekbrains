@@ -24,12 +24,12 @@ public class EmployeeBook {
     /**
      * Ищет сотрудников по стажу и возвращает список найденных сотрудников.
      *
-     * @param empoyeeExpectedExperience Ожидаемый стаж работы.
+     * @param employeeExpectedExperience Ожидаемый стаж работы.
      * @return Список сотрудников с заданным стажем.
      */
-    public List<Employee> searchEmployeeByExperience(int empoyeeExpectedExperience) {
+    public List<Employee> searchEmployeeByExperience(int employeeExpectedExperience) {
         return employeeMap.values().stream()
-                .filter(employee -> employee.getEmployeeExperience() == empoyeeExpectedExperience)
+                .filter(employee -> employee.getEmployeeExperience() == employeeExpectedExperience)
                 .collect(Collectors.toList());
     }
 

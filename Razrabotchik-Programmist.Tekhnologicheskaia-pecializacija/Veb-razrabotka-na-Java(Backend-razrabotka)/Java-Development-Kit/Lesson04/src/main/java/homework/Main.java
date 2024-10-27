@@ -5,8 +5,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         EmployeeBook employeeBook = new EmployeeBook();
-        Employee employee1 = new Employee("Иван Иванов", "123-456-7890", 5);
-        Employee employee2 = new Employee("Петр Петров", "987-654-3210", 3);
+        Employee employee1 = new Employee("Иван Иванов", "1234567890", 5);
+        Employee employee2 = new Employee("Петр Петров", "9876543210", 3);
 
         employeeBook.addEmployeeToEmployeeBook(employee1);
         employeeBook.addEmployeeToEmployeeBook(employee2);
