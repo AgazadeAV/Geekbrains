@@ -11,27 +11,27 @@ import lombok.ToString;
 @ToString
 public class Employee {
     @Getter(AccessLevel.NONE)
-    private static int startPosition = 0;
+    private static int startPositionForID = 0;
 
     /**
      * Уникальный идентификатор сотрудника.
      */
-    private final int id;
+    private final int employeeID;
 
     /**
      * Имя сотрудника.
      */
-    private final String name;
+    private final String employeeName;
 
     /**
      * Номер телефона сотрудника.
      */
-    private String phoneNumber;
+    private String employeePhoneNumber;
 
     /**
      * Стаж работы сотрудника в годах.
      */
-    private int experience;
+    private int employeeExperience;
 
     /**
      * Конструктор для создания нового экземпляра сотрудника.
@@ -40,10 +40,10 @@ public class Employee {
      * @param phoneNumber  Номер телефона сотрудника.
      * @param experience   Стаж работы сотрудника в годах.
      */
-    public Employee(String name, String phoneNumber, int experience) {
-        this.id = ++startPosition;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.experience = experience;
+    public Employee(String employeeName, String employeePhoneNumber, int employeeExperience) {
+        this.employeeID = ++startPositionForID;
+        this.employeeName = employeeName;
+        this.employeePhoneNumber = employeePhoneNumber;
+        this.employeeExperience = employeeExperience;
     }
 }
