@@ -52,7 +52,7 @@ public class EmployeeBook {
      * @param providedEmployeeID Табельный номер сотрудника.
      * @return Объект Employee, если найден, иначе null.
      */
-    public Employee searchEmployeeById(int providedEmployeeID) {
+    public Employee searchEmployeeByID(int providedEmployeeID) {
         return employeeMap.get(providedEmployeeID); // Быстрый поиск по табельному номеру
     }
 
