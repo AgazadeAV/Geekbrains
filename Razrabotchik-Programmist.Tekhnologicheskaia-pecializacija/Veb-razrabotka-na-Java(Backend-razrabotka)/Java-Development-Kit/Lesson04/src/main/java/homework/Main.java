@@ -13,7 +13,7 @@ public class Main {
 
         List<Employee> experiencedEmployees = employeeBook.searchEmployeeByExperience(5);
         List<String> phoneNumbers = employeeBook.searchEmployeePhoneNumberByName("Иван Иванов");
-        Employee foundEmployee = employeeBook.searchEmployeeById(1);
+        Employee foundEmployee = employeeBook.searchEmployeeByID(1);
 
         System.out.println("Сотрудники с 5-летним стажем: " + experiencedEmployees);
         System.out.println("Номера телефонов сотрудников по имени 'Иван Иванов': " + phoneNumbers);
